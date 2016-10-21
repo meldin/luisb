@@ -1,4 +1,4 @@
 # PSE TEST
 Conexión a un Web service SOAP
 
-[![GitHub release](https://img.shields.io/github/release/qubyte/rubidium.svg)]()
+[![Build release](https://img.shields.io/badge/Test-partial-brightgreen.svg)]()
