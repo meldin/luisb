@@ -44,7 +44,6 @@ class PTPAuthentication {
 	public function getUrl() {
 		return $this->url;
 	}
-
 	/**
 	 * Get the transactional key
 	 *

@@ -11,7 +11,6 @@ use Luisb\Pse\PTPProvider;
 use Luisb\Pse\PTPAuthentication;
 
 class SoapService {
-
     /**
      * url/path to wsdl
      *

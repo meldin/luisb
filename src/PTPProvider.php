@@ -39,8 +39,8 @@ class PTPProvider {
 	 * @param string
 	 * 
 	 * */
-	public function __construct( $param, $wsdl ) {
-		$this->auth = $param;
+	public function __construct( $auth, $wsdl ) {
+		$this->auth = $auth;
 		$this->wsdl = $wsdl;
 		$this->client = new \SoapClient( $this->wsdl ); // SoapClient global
 	}
@@ -58,7 +58,7 @@ class PTPProvider {
 	 *
 	 */
 	public function createTransaction( $transaction ) {
-		return $this->client->createTransaction( array( "auth"=>$this->auth, "transaction"=>$transaction ) )->createTransactionResult;
+		return $this->client->createTransaction( array( "auth"=>$this->auth, "transaction"=>$transaction ) )->createTransactionMultiCreditResult;
 	}
 	/**
 	 *  Create the multicredit transaction
