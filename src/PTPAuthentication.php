@@ -10,40 +10,64 @@ namespace Luisb\Pse;
 
 class PTPAuthentication {
 	/**
-	 * transactional key for auth.
+	 * Transactional key for authentication
 	 *
 	 * @var string
 	 */
 	private $key = '024h1IlD';
+	/**
+	 * Identifier provided by PlacetoPay
+	 *
+	 * @var string
+	 */
 	private $login = '6dd490faf9cb87a9862245da41170ff2';
+	/**
+	 * The endpoint
+	 *
+	 * @var string
+	 */
 	private $url = 'https://test.placetopay.com/soap/pse/?wsdl';
+	/**
+	 * Additional data for authentication
+	 *
+	 * @var string
+	 */
+	private $additional = [];
 	public function __construct(){
 		
 	}
 	/**
-	 * get the url/path to wsdl
+	 * Get the endpoint
 	 *
-	 * @var string
+	 * @return string
 	 */
 	public function getUrl() {
 		return $this->url;
 	}
 
 	/**
-	 * get the transactional key
+	 * Get the transactional key
 	 *
-	 * @var string
+	 * @return string
 	 */
 	public function getKey() {
 		return $this->key;
 	}
 	/**
-	 * get the identifier
+	 * Get the identifier
 	 *
-	 * @var string
+	 * @return string
 	 */
 	public function getLogin() {
 		return $this->login;
+	}
+	/**
+	 * Get the additional data
+	 *
+	 * @return array
+	 */
+	public function getAdditional() {
+		return $this->additional;
 	}
 
 }
