@@ -1,7 +1,7 @@
 # PSE TEST
 Conexión a un Web service SOAP
 
-[![](https://img.shields.io/badge/Test-partial-brightgreen.svg)](https://github.com/LuiisM/luisb)
+[![](https://img.shields.io/badge/Status-dev-brightgreen.svg)](https://github.com/LuiisM/luisb)
 
 
 Licencia
