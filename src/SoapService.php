@@ -12,30 +12,6 @@ use Luisb\Pse\PTPAuthentication;
 
 class SoapService {
     /**
-     * url/path to wsdl
-     *
-     * @var string
-     */
-    private $wsdl;
-    /**
-     * transactional key
-     *
-     * @var string
-     */
-    private $trankey;
-    /**
-     *  login
-     *
-     * @var string
-     */
-    private $login;
-    /**
-     *  additional data
-     *
-     * @var array
-     */
-    private $additional;
-    /**
      * Class
      *
      * @var PTPAuthentication
@@ -44,46 +20,37 @@ class SoapService {
     /**
      * Class
      *
-     * @var Functions
+     * @var PTPProvider
      */
     private $function;
     /**
-     *  Validate and set params, if they are null we provide them by default
+     *  Get the authentication, if they are null we provide them by default
      *  @param url/path to wsdl
      *  @param login for auth
      *  @param transactional key for auth
      */
     public function __construct( $param = array() ) {
-            $ptpauth = new PTPAuthentication();
+            $this->ptpauth = new PTPAuthentication();
             if ( isset( $param['wsdl'] ) ) {
-                $this->wsdl = $param['wsdl'];
-            }else {
-                $this->wsdl = $ptpauth->getUrl();
+                $this->ptpauth->setUrl = $param['wsdl'];
             }
             if ( isset( $param['trankey'] ) ) {
-                $this->trankey = $param['trankey'];
-            }else {
-                $this->trankey = $ptpauth->getKey();
+                $this->ptpauth->setKey = $param['trankey'];
             }
             if ( isset( $param['login'] ) ) {
-                $this->login = $param['login'];
-            }else {
-                $this->login = $ptpauth->getLogin();
+                $this->ptpauth->setLogin = $param['login'];
             }
             if ( isset( $param['additional'] ) ) {
-                $this->additional = $param['additional'];
-            }else {
-                $this->additional = $ptpauth->getAdditional();
+                $this->ptpauth->setAdditional = $param['additional'];
             }
     }
-
     /**
      *  Get the authentication
-     *  @return array     
+     *  @return array
      */
     public function getAuth() {
         $key = $this->buildKey();
-        $login = $this->login;
+        $login = $this->ptpauth->getLogin();
         $seed = $this->getValidDate();
         $auth_params = array( "login" => $login, "tranKey" => $key, "seed" => $seed  );
         return $auth_params;
@@ -97,21 +64,21 @@ class SoapService {
         return date( 'c' );
     }
     /**
-    *   Get the transactional key
-    *   @return sha1
-    *
-    */
+     *   Get the transactional key
+     *   @return sha1
+     *
+     */
     public function buildKey() {
         $seed = $this->getValidDate();
-        return sha1( $seed.$this->trankey, false );
+        return sha1( $seed.$this->ptpauth->getKey(), false );
     }
     /**
      *   Get the bank list
      *  @return array
      *
      */
-    public function bankList(){
-        $this->function = new PTPProvider($this->getAuth(),$this->wsdl);
+    public function bankList() {
+        $this->function = new PTPProvider( $this->getAuth(), $this->ptpauth->getUrl() );
         return $this->function->getBankList();
     }
     /**
@@ -119,27 +86,26 @@ class SoapService {
      *  @return array
      *
      */
-    public function beginTransaction($formdata){
-        $this->function = new PTPProvider($this->getAuth(),$this->wsdl);
-        return $this->function->createTransaction($formdata);
+    public function beginTransaction( $formdata ) {
+        $this->function = new PTPProvider( $this->getAuth(), $this->ptpauth->getUrl() );
+        return $this->function->createTransaction( $formdata );
     }
     /**
      *  Start transaction multicredit
      *  @return array
      *
      */
-    public function beginTransactionMulticredit($formdata){
-        $this->function = new PTPProvider($this->getAuth(),$this->wsdl);
-        return $this->function->createTransactionMulticredit($formdata);
+    public function beginTransactionMulticredit( $formdata ) {
+        $this->function = new PTPProvider( $this->getAuth(), $this->ptpauth->getUrl() );
+        return $this->function->createTransactionMulticredit( $formdata );
     }
     /**
      *  Get transaction by transaction ID
      *  @return array
-     * 
+     *
      */
-    public function findTransaction($id=""){
-        $this->function = new PTPProvider($this->getAuth(),$this->wsdl);
-        return $this->function->getTransactionInformation($id);   
+    public function findTransaction( $id="" ) {
+        $this->function = new PTPProvider( $this->getAuth(), $this->ptpauth->getUrl() );
+        return $this->function->getTransactionInformation( $id );
     }
 }
-

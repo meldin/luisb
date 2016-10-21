@@ -33,8 +33,8 @@ class PTPAuthentication {
 	 * @var string
 	 */
 	private $additional = [];
-	public function __construct(){
-		
+	public function __construct() {
+
 	}
 	/**
 	 * Get the endpoint
@@ -67,6 +67,38 @@ class PTPAuthentication {
 	 */
 	public function getAdditional() {
 		return $this->additional;
+	}
+	/**
+	 * Set the endpoint
+	 *
+	 * @var string
+	 */
+	public function setUrl( $url ) {
+		$this->url = $url;
+	}
+	/**
+	 * Set the transactional key
+	 *
+	 * @var string
+	 */
+	public function setKey( $key ) {
+		$this->key = $key;
+	}
+	/**
+	 * Set the identifier
+	 *
+	 * @var string
+	 */
+	public function setLogin( $login ) {
+		$this->login = $login;
+	}
+	/**
+	 * Set the additional data
+	 *
+	 * @var array
+	 */
+	public function setAdditional( $additional ) {
+		$this->additional = $additional;
 	}
 
 }

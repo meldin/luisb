@@ -26,8 +26,8 @@ class PTPProvider {
 	 */
 	private $wsdl;
 	/**
-	 *	Class
-	 *	
+	 * Class
+	 *
 	 * @var SoapClient
 	 *
 	 */
@@ -37,7 +37,7 @@ class PTPProvider {
 	 *
 	 * @param string
 	 * @param string
-	 * 
+	 *
 	 * */
 	public function __construct( $auth, $wsdl ) {
 		$this->auth = $auth;
